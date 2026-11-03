@@ -1,0 +1,47 @@
+# Hard limits. No agent edits this file. engine/guard.py enforces every line in code,
+# whatever a plan says. Only Warwick changes these numbers.
+
+account:
+  # Mark to market loss since midnight America/Detroit: cash plus held coins at the
+  # current bid. Counts held coins, so a 20% ADA drop on ~$250 of ADA trips it alone.
+  daily_loss_kill_usd: 50
+  # When tripped: cancel every open order, set control.trading_enabled = false, send
+  # an update email. Trading stays off until Warwick sets the flag back to true.
+  kill_switch_resets: manual_only
+  timezone: America/Detroit
+
+exchange:
+  name: binance_us
+  spot_only: true
+  quote_currencies: [USD]
+  # The API key must have withdrawals disabled and an IP restriction to the VPS.
+  withdrawals: never
+
+orders:
+  every_position_needs_exit: true       # a stop or time exit exists before the entry is placed
+  max_open_orders: 40
+  max_single_order_usd: 100
+  allowed_types: [LIMIT_MAKER, LIMIT, MARKET, STOP_LOSS_LIMIT, OCO]
+  max_taker_fills_per_day: 20           # taker is allowed for exits and justified entries
+  min_order_spacing_seconds: 2
+
+pairs:
+  max_active_pairs: 4                   # pairs with live strategy capital at once
+  max_watchlist_pairs: 8
+
+strategies:
+  max_capital_per_strategy_usd: 200
+  paper_min_days: 7
+  paper_min_round_trips: 20
+  live_start_usd: 50                    # first live allocation for any strategy
+  max_scale_up_per_week: 2.0            # allocation can at most double per week
+
+opportunity_sleeve:
+  total_usd: 50
+  per_position_usd: 25
+  max_new_positions_per_week: 2
+  thesis_required: true
+
+engine:
+  heartbeat_max_age_seconds: 120        # watcher escalates if the engine goes quiet
+  stale_price_seconds: 30               # no new orders on prices older than this

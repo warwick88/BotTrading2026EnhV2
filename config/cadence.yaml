@@ -1,0 +1,47 @@
+# When the desk wakes, and what counts as "something changed".
+# The desk lead may propose changes to this file in desk/notes; Warwick applies them.
+
+timezone: America/Detroit
+
+watcher:                       # Tier 1, plain code, no Claude usage
+  every_minutes: 30
+
+analyst_check:                 # Tier 2, one short market-analyst run
+  calm_every_hours: 4
+  normal_every_hours: 2
+  hot_every_hours: 1
+  # The analyst's last MARKET: line sets the pace: CALM, NORMAL, HOT or ALERT.
+
+daily_review:                  # Tier 3, scheduled
+  at: "06:30"
+morning_brief:
+  at: "07:00"
+  email_to: warwick.j.barlow@gmail.com
+
+# Any one of these wakes the full desk (Tier 3) outside the schedule.
+escalate_when:
+  price_move_pct_1h: 3.0          # any watched pair
+  price_move_pct_24h: 8.0
+  spread_wider_than_bps: 40       # top of book, any active pair
+  daily_loss_usd: 25              # half the kill switch
+  stop_hit: true
+  kill_switch_tripped: true
+  fee_mismatch: true              # a fill's fee disagrees with config/fees.yaml
+  new_listing: true               # new USD pair or listing announcement
+  engine_heartbeat_missing: true
+  analyst_says: ALERT
+
+research:                      # Tier 4
+  only_when_market: [CALM, NORMAL]
+  max_runs_per_day: 3
+  max_pairs_per_run: 2
+  max_history_days: 180           # candles; order book research uses what the collector holds
+
+usage:
+  # Pro does not publish its limits as token counts, so this is an estimate to calibrate.
+  # Start conservative, watch a week of runs, then adjust. Units: weighted tokens per
+  # rolling 5 hours (input + cache writes + output, cache reads counted at 10%).
+  window_hours: 5
+  budget_weighted_tokens: 1500000
+  research_stops_at_pct: 50       # no new research dispatches past this
+  essentials_only_at_pct: 80      # past this, only the analyst and risk officer run

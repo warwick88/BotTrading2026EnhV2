@@ -1,0 +1,14 @@
+# Brain container schedule (America/Detroit). Install with: crontab ops/crontab.txt
+# The watcher (Tier 1) runs in its own container and calls ops/wake.sh ESCALATION itself.
+CRON_TZ=America/Detroit
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# Tier 2: offered every hour; ops/due.py lets it through only when due
+# (calm every 4h, normal 2h, hot or alert 1h, per the analyst's last call).
+17 * * * *    /app/ops/wake.sh CHECK
+
+# Tier 3: daily review, which writes and sends the 07:00 brief.
+31 6 * * *    /app/ops/wake.sh DAILY_REVIEW
+
+# Tier 4: research, only on CALM or NORMAL days and inside the usage window.
+43 1,13 * * * /app/ops/wake.sh RESEARCH

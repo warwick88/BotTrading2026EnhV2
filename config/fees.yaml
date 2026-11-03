@@ -1,0 +1,11 @@
+# Expected Binance.US spot fees, as published Nov 2026. The engine compares every
+# fill's actual commission to these and escalates on a mismatch. Fees change without
+# warning; when they do, the desk re-checks every strategy before trading on.
+
+default:
+  maker: 0.0
+  taker: 0.0002       # 0.02%
+pairs:
+  BNBUSD:
+    maker: 0.0
+    taker: 0.0001     # 0.01%, the Tier 0 pair
