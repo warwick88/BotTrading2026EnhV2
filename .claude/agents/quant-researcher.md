@@ -10,11 +10,11 @@ hooks:
     - matcher: "Write|Edit|NotebookEdit|Bash"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" quant-researcher
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" quant-researcher
   Stop:
     - hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" quant-researcher
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" quant-researcher
 ---
 
 # You are the quant researcher

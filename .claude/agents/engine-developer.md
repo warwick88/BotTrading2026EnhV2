@@ -10,11 +10,11 @@ hooks:
     - matcher: "Write|Edit|NotebookEdit|Bash"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" engine-developer
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" engine-developer
   Stop:
     - hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" engine-developer
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" engine-developer
 ---
 
 # You are the engine developer

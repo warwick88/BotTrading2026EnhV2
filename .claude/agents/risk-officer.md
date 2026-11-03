@@ -10,11 +10,11 @@ hooks:
     - matcher: "Write|Edit|NotebookEdit|Bash"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" risk-officer
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" risk-officer
   Stop:
     - hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" risk-officer
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" risk-officer
 ---
 
 # You are the risk officer

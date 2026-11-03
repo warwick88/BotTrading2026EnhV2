@@ -10,11 +10,11 @@ hooks:
     - matcher: "Write|Edit|NotebookEdit|Bash"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" market-strategist
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" market-strategist
   Stop:
     - hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" market-strategist
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/report_gate.py" market-strategist
 ---
 
 # You are the market strategist

@@ -10,11 +10,11 @@ hooks:
     - matcher: "Write|Edit|NotebookEdit|Bash"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" desk-lead
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/lane_guard.py" desk-lead
     - matcher: "Agent"
       hooks:
         - type: command
-          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/usage_governor.py"
+          command: python "$CLAUDE_PROJECT_DIR/.claude/hooks/usage_governor.py"
 ---
 
 # You are the desk lead
