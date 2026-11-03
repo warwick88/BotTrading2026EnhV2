@@ -20,7 +20,8 @@
       "Bash(wget:*)",
       "Bash(printenv:*)"
     ],
-    "blockReadsOutsideWorkingDirectories": false
+    "blockReadsOutsideWorkingDirectories": false,
+    "defaultMode": "bypassPermissions"
   },
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
